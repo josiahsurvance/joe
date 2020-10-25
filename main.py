@@ -7,11 +7,12 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
 import sys
+
 players = 2
 check = 1
 wow = "13"
 round = 1
-names = ""
+names = ["","","","","","","","","","","",""]
 reset = 1
 p1s = ["0"]
 p2s = ["0"]
@@ -25,6 +26,7 @@ p9s = ["0"]
 p10s = ["0"]
 p11s = ["0"]
 p12s = ["0"]
+
 
 class MainWindow(Screen):
     def check_check(self):
@@ -54,9 +56,11 @@ class MainWindow(Screen):
             self.ids.resume.text = "          Resume Game          "
         elif check == 12:
             self.ids.resume.text = "           Resume Game           "
+
     def __init__(self, **kwargs):
         super(MainWindow, self).__init__(**kwargs)
         Window.bind(on_keyboard=self.Android_back_click)
+
     def Android_back_click(self, window, key, *largs):
         if key == 27:
             if self.manager.current == 'main' or self.manager.current == "rusure":
@@ -71,97 +75,116 @@ class MainWindow(Screen):
                 self.manager.transition.direction = 'right'
             return True
 
+
 class WhichScoreWindow(Screen):
     pass
+
 
 class WhichVersionWindow(Screen):
     pass
 
+
 class Help1Window(Screen):
     pass
+
 
 class Help2Window(Screen):
     pass
 
+
 class ExitWindow(Screen):
     pass
+
 
 class ScoreWindow(Screen):
     def create_new_number(self, x):
         global wow
         wow = x
+
     def change_text1(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c1.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c1.text = wow
+
     def change_text2(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c2.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c2.text = wow
+
     def change_text3(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c3.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c3.text = wow
+
     def change_text4(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c4.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c4.text = wow
+
     def change_text5(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c5.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c5.text = wow
+
     def change_text6(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c6.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c6.text = wow
+
     def change_text7(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c7.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c7.text = wow
+
     def change_text8(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c8.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c8.text = wow
+
     def change_text9(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c9.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c9.text = wow
+
     def change_text10(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c10.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c10.text = wow
+
     def change_text11(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c11.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c11.text = wow
+
     def change_text12(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c12.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c12.text = wow
+
     def get_score(self, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12):
         score = 0  # Score starts at 0
         cards = []
@@ -208,10 +231,12 @@ class ScoreWindow(Screen):
                 score += 10
         popupWindow = Popup(title='Score = ' + str(score), title_align='center', size_hint=(0.8, 0.1), size=(400, 400))
         popupWindow.open()
+
     def get_help(self):
         popupWindow = Popup(title="Help", title_align='center', size_hint=(0.8, 0.2), size=(400, 400),
                             content=Label(text="Lol you can't figure it out? Idiot."))
         popupWindow.open()
+
     def check_check(self):
         if check == 1:
             self.ids.gotogame.text = "Game"
@@ -238,105 +263,124 @@ class ScoreWindow(Screen):
         elif check == 12:
             self.ids.gotogame.text = "           Game           "
 
+
 class Score2Window(Screen):
     def create_new_number(self, x):
         global wow
         wow = x
+
     def change_text1(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c1.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c1.text = wow
+
     def change_text2(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c2.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c2.text = wow
+
     def change_text3(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c3.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c3.text = wow
+
     def change_text4(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c4.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c4.text = wow
+
     def change_text5(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c5.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c5.text = wow
+
     def change_text6(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c6.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c6.text = wow
+
     def change_text7(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c7.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c7.text = wow
+
     def change_text8(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c8.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c8.text = wow
+
     def change_text9(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c9.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c9.text = wow
+
     def change_text10(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c10.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c10.text = wow
+
     def change_text11(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c11.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c11.text = wow
+
     def change_text12(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c12.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c12.text = wow
+
     def change_text13(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c13.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c13.text = wow
+
     def change_text14(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c14.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c14.text = wow
+
     def change_text15(self):
         global wow
         if wow == "Skip-Bo":
             self.ids.c15.text = "Skip\n-Bo"
         elif int(wow) < 13:
             self.ids.c15.text = wow
-    def get_score(self, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14, card15):
+
+    def get_score(self, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13,
+                  card14, card15):
         score = 0  # Score starts at 0
         cards = []
 
-        cardlist = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14, card15]
+        cardlist = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13,
+                    card14, card15]
         for n in list(range(15)):
             if cardlist[n] == 'Skip\n-Bo':
                 cardlist[n] = '0'
@@ -361,17 +405,18 @@ class Score2Window(Screen):
                 if bottom_row[n] != middle_row[n]:
                     if bottom_row[n] != 7 and bottom_row[n] != 11:
                         score += int(bottom_row[n])
-                if bottom_row[n+1] != middle_row[n]:
-                    if bottom_row[n+1] != 7 and bottom_row[n+1] != 11:
-                        score += int(bottom_row[n+1])
-            elif middle_row[n] == middle_row[n + 1] and middle_row[n] == bottom_row[n] and middle_row[n + 1] == bottom_row[n + 1]:
+                if bottom_row[n + 1] != middle_row[n]:
+                    if bottom_row[n + 1] != 7 and bottom_row[n + 1] != 11:
+                        score += int(bottom_row[n + 1])
+            elif middle_row[n] == middle_row[n + 1] and middle_row[n] == bottom_row[n] and middle_row[n + 1] == \
+                    bottom_row[n + 1]:
                 score -= 20
                 if top_row[n] != middle_row[n]:
                     if top_row[n] != 7 and top_row[n] != 11:
                         score += int(top_row[n])
-                if top_row[n+1] != middle_row[n]:
-                    if top_row[n+1] != 7 and top_row[n+1] != 11:
-                        score += int(top_row[n+1])
+                if top_row[n + 1] != middle_row[n]:
+                    if top_row[n + 1] != 7 and top_row[n + 1] != 11:
+                        score += int(top_row[n + 1])
             else:
                 if n == 0:
                     if top_row[n] != middle_row[n] or top_row[n] != bottom_row[n] or middle_row[n] != bottom_row[n]:
@@ -383,26 +428,30 @@ class Score2Window(Screen):
                             bottom_row[n] = 0
                         score += int(top_row[n]) + int(middle_row[n]) + int(bottom_row[n])
                 else:
-                    if top_row[n] == top_row[n-1] and top_row[n] == middle_row[n] and top_row[n-1] == middle_row[n-1]:
+                    if top_row[n] == top_row[n - 1] and top_row[n] == middle_row[n] and top_row[n - 1] == middle_row[
+                        n - 1]:
                         if n == 3:
-                            if top_row[n+1] != middle_row[n+1] or top_row[n+1] != bottom_row[n+1] or middle_row[n+1] != bottom_row[n+1]:
-                                if top_row[n+1] == 7 or top_row[n+1] == 11:
-                                    top_row[n+1] = 0
-                                if middle_row[n+1] == 7 or middle_row[n+1] == 11:
-                                    middle_row[n+1] = 0
-                                if bottom_row[n+1] == 7 or bottom_row[n+1] == 11:
-                                    bottom_row[n+1] = 0
-                                score += int(top_row[n+1]) + int(middle_row[n+1]) + int(bottom_row[n+1])
-                    elif middle_row[n] == middle_row[n-1] and middle_row[n] == bottom_row[n] and middle_row[n-1] == bottom_row[n-1]:
+                            if top_row[n + 1] != middle_row[n + 1] or top_row[n + 1] != bottom_row[n + 1] or middle_row[
+                                n + 1] != bottom_row[n + 1]:
+                                if top_row[n + 1] == 7 or top_row[n + 1] == 11:
+                                    top_row[n + 1] = 0
+                                if middle_row[n + 1] == 7 or middle_row[n + 1] == 11:
+                                    middle_row[n + 1] = 0
+                                if bottom_row[n + 1] == 7 or bottom_row[n + 1] == 11:
+                                    bottom_row[n + 1] = 0
+                                score += int(top_row[n + 1]) + int(middle_row[n + 1]) + int(bottom_row[n + 1])
+                    elif middle_row[n] == middle_row[n - 1] and middle_row[n] == bottom_row[n] and middle_row[n - 1] == \
+                            bottom_row[n - 1]:
                         if n == 3:
-                            if top_row[n + 1] != middle_row[n + 1] or top_row[n + 1] != bottom_row[n + 1] or middle_row[n + 1] != bottom_row[n + 1]:
-                                if top_row[n+1] == 7 or top_row[n+1] == 11:
-                                    top_row[n+1] = 0
-                                if middle_row[n+1] == 7 or middle_row[n+1] == 11:
-                                    middle_row[n+1] = 0
-                                if bottom_row[n+1] == 7 or bottom_row[n+1] == 11:
-                                    bottom_row[n+1] = 0
-                                score += int(top_row[n+1]) + int(middle_row[n+1]) + int(bottom_row[n+1])
+                            if top_row[n + 1] != middle_row[n + 1] or top_row[n + 1] != bottom_row[n + 1] or middle_row[
+                                n + 1] != bottom_row[n + 1]:
+                                if top_row[n + 1] == 7 or top_row[n + 1] == 11:
+                                    top_row[n + 1] = 0
+                                if middle_row[n + 1] == 7 or middle_row[n + 1] == 11:
+                                    middle_row[n + 1] = 0
+                                if bottom_row[n + 1] == 7 or bottom_row[n + 1] == 11:
+                                    bottom_row[n + 1] = 0
+                                score += int(top_row[n + 1]) + int(middle_row[n + 1]) + int(bottom_row[n + 1])
                     else:
                         if top_row[n] != middle_row[n] or top_row[n] != bottom_row[n] or middle_row[n] != bottom_row[n]:
                             if top_row[n] == 7 or top_row[n] == 11:
@@ -413,7 +462,8 @@ class Score2Window(Screen):
                                 bottom_row[n] = 0
                             score += int(top_row[n]) + int(middle_row[n]) + int(bottom_row[n])
                         if n == 3:
-                            if top_row[n + 1] != middle_row[n + 1] or top_row[n + 1] != bottom_row[n + 1] or middle_row[n + 1] != bottom_row[n + 1]:
+                            if top_row[n + 1] != middle_row[n + 1] or top_row[n + 1] != bottom_row[n + 1] or middle_row[
+                                n + 1] != bottom_row[n + 1]:
                                 if top_row[n + 1] == 7 or top_row[n + 1] == 11:
                                     top_row[n + 1] = 0
                                 if middle_row[n + 1] == 7 or middle_row[n + 1] == 11:
@@ -432,7 +482,8 @@ class Score2Window(Screen):
                 if bottom_row[n + 1] != middle_row[n + 1]:
                     if bottom_row[n + 1] != 7 and bottom_row[n + 1] != 11:
                         score -= int(bottom_row[n + 1])
-            elif middle_row[n] == middle_row[n + 1] and middle_row[n + 1] == middle_row[n + 2] and middle_row[n] == bottom_row[n] and \
+            elif middle_row[n] == middle_row[n + 1] and middle_row[n + 1] == middle_row[n + 2] and middle_row[n] == \
+                    bottom_row[n] and \
                     middle_row[n + 1] == bottom_row[n + 1] and middle_row[n + 2] == bottom_row[n + 2]:
                 score += 10
                 if top_row[n + 1] != middle_row[n + 1]:
@@ -473,6 +524,7 @@ class Score2Window(Screen):
         elif check == 12:
             self.ids.gotogame.text = "           Game           "
 
+
 class GameWindow(Screen):
     def update_players(self, x):
         global players
@@ -484,6 +536,7 @@ class GameWindow(Screen):
             if players < 12:
                 players += 1
                 self.ids.players.text = str(players)
+
     def update_check(self):
         global check
         global players
@@ -520,20 +573,66 @@ class GameWindow(Screen):
         elif players == 12:
             check = 12
             self.ids.start.text = "          Next          "
+        name2.update_names()
+        name3.update_names()
+        name4.update_names()
+        name5.update_names()
+        name6.update_names()
+        name7.update_names()
+        name8.update_names()
+        name9.update_names()
+        name10.update_names()
+        name11.update_names()
+        name12.update_names()
+
+    def update_names(self):
+        name2.update_names()
+        name3.update_names()
+        name4.update_names()
+        name5.update_names()
+        name6.update_names()
+        name7.update_names()
+        name8.update_names()
+        name9.update_names()
+        name10.update_names()
+        name11.update_names()
+        name12.update_names()
 
 
 class Name2Window(Screen):
     def start_game(self, a, b):
         global names
-        names = [str(a), str(b)]
+        list = [a, b]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game2.setup()
+
     def check_next(self, t1, t2):
         if t1 != "" and t2 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b):
         global check
         check = 1
+        global names
+        list = [a, b]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+
 
 class Game2PlayerWindow(Screen):
     def setup(self):
@@ -554,6 +653,7 @@ class Game2PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -568,12 +668,13 @@ class Game2PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
         if round == 1:
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, y):
         global round
         global p1s
@@ -588,12 +689,12 @@ class Game2PlayerWindow(Screen):
                 s[n] = int(s[n])
                 p1s[round - 1] = s[0]
                 p2s[round - 1] = s[1]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
         x = len(p1s)
         for n in list(range(x)):
             score1 += int(p1s[n])
@@ -623,19 +724,43 @@ class Game2PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name3Window(Screen):
     def start_game(self, a, b, c):
         global names
-        names = [str(a), str(b), str(c)]
+        list = [a, b, c]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game3.setup()
 
     def check_next(self, t1, t2, t3):
         if t1 != "" and t2 != "" and t3 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c):
         global check
         check = 1
+        global names
+        list = [a, b, c]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+
 
 class Game3PlayerWindow(Screen):
     def setup(self):
@@ -661,6 +786,7 @@ class Game3PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -677,13 +803,14 @@ class Game3PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
         if round == 1:
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, y):
         global round
         global p1s
@@ -701,13 +828,13 @@ class Game3PlayerWindow(Screen):
                 p1s[round - 1] = s[0]
                 p2s[round - 1] = s[1]
                 p3s[round - 1] = s[2]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
         x = len(p1s)
         for n in list(range(x)):
@@ -741,19 +868,45 @@ class Game3PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name4Window(Screen):
     def start_game(self, a, b, c, d):
         global names
-        names = [str(a), str(b), str(c), str(d)]
+        list = [a, b, c, d]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game4.setup()
 
     def check_next(self, t1, t2, t3, t4):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c, d):
         global check
         check = 1
+        global names
+        list = [a, b, c, d]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+
 
 class Game4PlayerWindow(Screen):
     def setup(self):
@@ -784,6 +937,7 @@ class Game4PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -802,14 +956,15 @@ class Game4PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
                 self.ids.p4.text = str(p4s[round - 1])
         if round == 1:
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, s4, y):
         global round
         global p1s
@@ -830,14 +985,14 @@ class Game4PlayerWindow(Screen):
                 p2s[round - 1] = s[1]
                 p3s[round - 1] = s[2]
                 p4s[round - 1] = s[3]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
             p4s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
             p4s[round - 1] = s[3]
         x = len(p1s)
@@ -875,19 +1030,47 @@ class Game4PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name5Window(Screen):
     def start_game(self, a, b, c, d, e):
         global names
-        names = [str(a), str(b), str(c), str(d), str(e)]
+        list = [a, b, c, d, e]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game5.setup()
 
     def check_next(self, t1, t2, t3, t4, t5):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c, d, e):
         global check
         check = 1
+        global names
+        list = [a, b, c, d, e]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+
 
 class Game5PlayerWindow(Screen):
     def setup(self):
@@ -923,6 +1106,7 @@ class Game5PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -943,8 +1127,8 @@ class Game5PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
                 self.ids.p4.text = str(p4s[round - 1])
                 self.ids.p5.text = str(p5s[round - 1])
@@ -952,6 +1136,7 @@ class Game5PlayerWindow(Screen):
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, s4, s5, y):
         global round
         global p1s
@@ -975,15 +1160,15 @@ class Game5PlayerWindow(Screen):
                 p3s[round - 1] = s[2]
                 p4s[round - 1] = s[3]
                 p5s[round - 1] = s[4]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
             p4s.append("0")
             p5s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
             p4s[round - 1] = s[3]
             p5s[round - 1] = s[4]
@@ -1025,19 +1210,49 @@ class Game5PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name6Window(Screen):
     def start_game(self, a, b, c, d, e, f):
         global names
-        names = [str(a), str(b), str(c), str(d), str(e), str(f)]
+        list = [a, b, c, d, e, f]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game6.setup()
 
     def check_next(self, t1, t2, t3, t4, t5, t6):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c, d, e, f):
         global check
         check = 1
+        global names
+        list = [a, b, c, d, e, f]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+
 
 class Game6PlayerWindow(Screen):
     def setup(self):
@@ -1078,6 +1293,7 @@ class Game6PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -1100,8 +1316,8 @@ class Game6PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
                 self.ids.p4.text = str(p4s[round - 1])
                 self.ids.p5.text = str(p5s[round - 1])
@@ -1110,6 +1326,7 @@ class Game6PlayerWindow(Screen):
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, s4, s5, s6, y):
         global round
         global p1s
@@ -1136,7 +1353,7 @@ class Game6PlayerWindow(Screen):
                 p4s[round - 1] = s[3]
                 p5s[round - 1] = s[4]
                 p6s[round - 1] = s[5]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1144,8 +1361,8 @@ class Game6PlayerWindow(Screen):
             p5s.append("0")
             p6s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
             p4s[round - 1] = s[3]
             p5s[round - 1] = s[4]
@@ -1191,19 +1408,51 @@ class Game6PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name7Window(Screen):
     def start_game(self, a, b, c, d, e, f, g):
         global names
-        names = [str(a), str(b), str(c), str(d), str(e), str(f), str(g)]
+        list = [a, b, c, d, e, f, g]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game7.setup()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c, d, e, f, g):
         global check
         check = 1
+        global names
+        list = [a, b, c, d, e, f, g]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+
 
 class Game7PlayerWindow(Screen):
     def setup(self):
@@ -1249,6 +1498,7 @@ class Game7PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -1273,8 +1523,8 @@ class Game7PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
                 self.ids.p4.text = str(p4s[round - 1])
                 self.ids.p5.text = str(p5s[round - 1])
@@ -1284,6 +1534,7 @@ class Game7PlayerWindow(Screen):
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, s4, s5, s6, s7, y):
         global round
         global p1s
@@ -1313,7 +1564,7 @@ class Game7PlayerWindow(Screen):
                 p5s[round - 1] = s[4]
                 p6s[round - 1] = s[5]
                 p7s[round - 1] = s[6]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1322,8 +1573,8 @@ class Game7PlayerWindow(Screen):
             p6s.append("0")
             p7s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
             p4s[round - 1] = s[3]
             p5s[round - 1] = s[4]
@@ -1373,19 +1624,53 @@ class Game7PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name8Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h):
         global names
-        names = [str(a), str(b), str(c), str(d), str(e), str(f), str(g), str(h)]
+        list = [a, b, c, d, e, f, g, h]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game8.setup()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c, d, e, f, g, h):
         global check
         check = 1
+        global names
+        list = [a, b, c, d, e, f, g, h]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+
 
 class Game8PlayerWindow(Screen):
     def setup(self):
@@ -1436,6 +1721,7 @@ class Game8PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -1462,8 +1748,8 @@ class Game8PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
                 self.ids.p4.text = str(p4s[round - 1])
                 self.ids.p5.text = str(p5s[round - 1])
@@ -1474,6 +1760,7 @@ class Game8PlayerWindow(Screen):
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, s4, s5, s6, s7, s8, y):
         global round
         global p1s
@@ -1506,7 +1793,7 @@ class Game8PlayerWindow(Screen):
                 p6s[round - 1] = s[5]
                 p7s[round - 1] = s[6]
                 p8s[round - 1] = s[7]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1516,8 +1803,8 @@ class Game8PlayerWindow(Screen):
             p7s.append("0")
             p8s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
             p4s[round - 1] = s[3]
             p5s[round - 1] = s[4]
@@ -1571,19 +1858,55 @@ class Game8PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name9Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h, i):
         global names
-        names = [str(a), str(b), str(c), str(d), str(e), str(f), str(g), str(h), str(i)]
+        list = [a, b, c, d, e, f, g, h, i]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game9.setup()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "" and t9 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c, d, e, f, g, h, i):
         global check
         check = 1
+        global names
+        list = [a, b, c, d, e, f, g, h, i]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+        self.ids.p9.text = names[8]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+        self.ids.p9.text = names[8]
+
 
 class Game9PlayerWindow(Screen):
     def setup(self):
@@ -1639,6 +1962,7 @@ class Game9PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -1667,8 +1991,8 @@ class Game9PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
                 self.ids.p4.text = str(p4s[round - 1])
                 self.ids.p5.text = str(p5s[round - 1])
@@ -1680,6 +2004,7 @@ class Game9PlayerWindow(Screen):
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, s4, s5, s6, s7, s8, s9, y):
         global round
         global p1s
@@ -1715,7 +2040,7 @@ class Game9PlayerWindow(Screen):
                 p7s[round - 1] = s[6]
                 p8s[round - 1] = s[7]
                 p9s[round - 1] = s[8]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1726,8 +2051,8 @@ class Game9PlayerWindow(Screen):
             p8s.append("0")
             p9s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
             p4s[round - 1] = s[3]
             p5s[round - 1] = s[4]
@@ -1785,19 +2110,57 @@ class Game9PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name10Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h, i, j):
         global names
-        names = [str(a), str(b), str(c), str(d), str(e), str(f), str(g), str(h), str(i), str(j)]
+        list = [a, b, c, d, e, f, g, h, i, j]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game10.setup()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "" and t9 != "" and t10 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c, d, e, f, g, h, i, j):
         global check
         check = 1
+        global names
+        list = [a, b, c, d, e, f, g, h, i, j]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+        self.ids.p9.text = names[8]
+        self.ids.p10.text = names[9]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+        self.ids.p9.text = names[8]
+        self.ids.p10.text = names[9]
+
 
 class Game10PlayerWindow(Screen):
     def setup(self):
@@ -1858,6 +2221,7 @@ class Game10PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -1888,8 +2252,8 @@ class Game10PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
                 self.ids.p4.text = str(p4s[round - 1])
                 self.ids.p5.text = str(p5s[round - 1])
@@ -1902,6 +2266,7 @@ class Game10PlayerWindow(Screen):
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, y):
         global round
         global p1s
@@ -1940,7 +2305,7 @@ class Game10PlayerWindow(Screen):
                 p8s[round - 1] = s[7]
                 p9s[round - 1] = s[8]
                 p10s[round - 1] = s[9]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1952,8 +2317,8 @@ class Game10PlayerWindow(Screen):
             p9s.append("0")
             p10s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
             p4s[round - 1] = s[3]
             p5s[round - 1] = s[4]
@@ -2015,19 +2380,59 @@ class Game10PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name11Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h, i, j, k):
         global names
-        names = [str(a), str(b), str(c), str(d), str(e), str(f), str(g), str(h), str(i), str(j), str(k)]
+        list = [a, b, c, d, e, f, g, h, i, j, k]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game11.setup()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "" and t9 != "" and t10 != "" and t11 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c, d, e, f, g, h, i, j, k):
         global check
         check = 1
+        global names
+        list = [a, b, c, d, e, f, g, h, i, j, k]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+        self.ids.p9.text = names[8]
+        self.ids.p10.text = names[9]
+        self.ids.p11.text = names[10]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+        self.ids.p9.text = names[8]
+        self.ids.p10.text = names[9]
+        self.ids.p11.text = names[10]
+
 
 class Game11PlayerWindow(Screen):
     def setup(self):
@@ -2093,6 +2498,7 @@ class Game11PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -2125,8 +2531,8 @@ class Game11PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
                 self.ids.p4.text = str(p4s[round - 1])
                 self.ids.p5.text = str(p5s[round - 1])
@@ -2140,6 +2546,7 @@ class Game11PlayerWindow(Screen):
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, y):
         global round
         global p1s
@@ -2181,7 +2588,7 @@ class Game11PlayerWindow(Screen):
                 p9s[round - 1] = s[8]
                 p10s[round - 1] = s[9]
                 p11s[round - 1] = s[10]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -2194,8 +2601,8 @@ class Game11PlayerWindow(Screen):
             p10s.append("0")
             p11s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
             p4s[round - 1] = s[3]
             p5s[round - 1] = s[4]
@@ -2261,19 +2668,60 @@ class Game11PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class Name12Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h, i, j, k, l):
         global names
         names = [str(a), str(b), str(c), str(d), str(e), str(f), str(g), str(h), str(i), str(j), str(k), str(l)]
+        game12.setup()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "" and t9 != "" and t10 != "" and t11 != "" and t12 != "":
             self.ids.next.disabled = False
         else:
             self.ids.next.disabled = True
-    def back(self):
+
+    def back(self, a, b, c, d, e, f, g, h, i, j, k, l):
         global check
         check = 1
+        global names
+        list = [a, b, c, d, e, f, g, h, i, j, k, l]
+        for n in range(len(list)):
+            names[n] = str(list[n])
+        game.update_names()
+
+    def update_names(self):
+        global names
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+        self.ids.p9.text = names[8]
+        self.ids.p10.text = names[9]
+        self.ids.p11.text = names[10]
+        self.ids.p12.text = names[11]
+
+    def reset_names(self):
+        global names
+        names = ["","","","","","","","","","","",""]
+        self.ids.p1.text = names[0]
+        self.ids.p2.text = names[1]
+        self.ids.p3.text = names[2]
+        self.ids.p4.text = names[3]
+        self.ids.p5.text = names[4]
+        self.ids.p6.text = names[5]
+        self.ids.p7.text = names[6]
+        self.ids.p8.text = names[7]
+        self.ids.p9.text = names[8]
+        self.ids.p10.text = names[9]
+        self.ids.p11.text = names[10]
+        self.ids.p12.text = names[11]
+
+
 
 class Game12PlayerWindow(Screen):
     def setup(self):
@@ -2344,6 +2792,7 @@ class Game12PlayerWindow(Screen):
             round = 1
             self.ids.round.text = "Round 1"
             reset = 2
+
     def update_round(self, x):
         global round
         global p1s
@@ -2378,8 +2827,8 @@ class Game12PlayerWindow(Screen):
             if x == 1:
                 round -= 1
                 self.ids.round.text = "Round " + str(round)
-                self.ids.p1.text = str(p1s[round-1])
-                self.ids.p2.text = str(p2s[round-1])
+                self.ids.p1.text = str(p1s[round - 1])
+                self.ids.p2.text = str(p2s[round - 1])
                 self.ids.p3.text = str(p3s[round - 1])
                 self.ids.p4.text = str(p4s[round - 1])
                 self.ids.p5.text = str(p5s[round - 1])
@@ -2394,6 +2843,7 @@ class Game12PlayerWindow(Screen):
             self.ids.back.disabled = True
         else:
             self.ids.back.disabled = False
+
     def update_score(self, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, y):
         global round
         global p1s
@@ -2438,7 +2888,7 @@ class Game12PlayerWindow(Screen):
                 p10s[round - 1] = s[9]
                 p11s[round - 1] = s[10]
                 p12s[round - 1] = s[11]
-        if y == 2 and p1s[len(p1s)-1] != "0":
+        if y == 2 and p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -2452,8 +2902,8 @@ class Game12PlayerWindow(Screen):
             p11s.append("0")
             p12s.append("0")
         if y == 2:
-            p1s[round-1] = s[0]
-            p2s[round-1] = s[1]
+            p1s[round - 1] = s[0]
+            p2s[round - 1] = s[1]
             p3s[round - 1] = s[2]
             p4s[round - 1] = s[3]
             p5s[round - 1] = s[4]
@@ -2523,6 +2973,7 @@ class Game12PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+
 class AreYouSureWindow(Screen):
     def update_check(self, x):
         global check
@@ -2554,10 +3005,12 @@ class AreYouSureWindow(Screen):
             elif check == 12:
                 self.ids.no.text = "          No          "
 
+
 class WindowManager(ScreenManager):
     pass
 
-kv = Builder.load_string("""
+
+Builder.load_string("""
 <BackgroundColor@Widget>
     background_color: 1, 1, 1, 1
     canvas.before:
@@ -2566,47 +3019,13 @@ kv = Builder.load_string("""
         Rectangle:
             size: self.size
             pos: self.pos
-            
+
 <BackgroundLabel@Label+BackgroundColor>
     background_color: 0, 0, 0, 0
     # to r 0, g 0, b 0, a 0
-    
+
 <TextInput>
     multiline: False
-
-WindowManager:
-    MainWindow:
-    WhichScoreWindow:
-    WhichVersionWindow:
-    Help1Window:
-    Help2Window:
-    ExitWindow:
-    ScoreWindow:
-    Score2Window:
-    GameWindow:
-    Name2Window:
-    Game2PlayerWindow:
-    Name3Window:
-    Game3PlayerWindow:
-    Name4Window:
-    Game4PlayerWindow:
-    Name5Window:
-    Game5PlayerWindow:
-    Name6Window:
-    Game6PlayerWindow:
-    Name7Window:
-    Game7PlayerWindow:
-    Name8Window:
-    Game8PlayerWindow:
-    Name9Window:
-    Game9PlayerWindow:
-    Name10Window:
-    Game10PlayerWindow:
-    Name11Window:
-    Game11PlayerWindow:
-    Name12Window:
-    Game12PlayerWindow:
-    AreYouSureWindow:
 
 <MainWindow>:
     name: "main"
@@ -2652,7 +3071,7 @@ WindowManager:
             on_release:
                 app.root.current = "exit"
                 root.manager.transition.direction = "left"
-            
+
 <ExitWindow>:
     name: "exit"
     GridLayout:
@@ -2722,7 +3141,7 @@ WindowManager:
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
-                
+
 <Help1Window>:
     name: "help1"
     ScrollView:
@@ -2756,7 +3175,7 @@ WindowManager:
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
-                
+
 <ScoreWindow>:
     name: "score"
 
@@ -2764,7 +3183,7 @@ WindowManager:
         cols: 1
         Label:
             text: '1. The blue rows represent your cards.\\n2. Select number from green rows.\\n3. Select your cards that have this value.\\n4. When done, click score to find score.'
-        
+
         GridLayout:
             cols: 6
 
@@ -2830,7 +3249,7 @@ WindowManager:
                 background_color: 0,0.5,1,1
                 on_release: 
                     root.change_text12()
-                    
+
         GridLayout:
             cols: 6
             Button:
@@ -2901,7 +3320,7 @@ WindowManager:
                 text: 'Skip\\n-Bo'
                 background_color: 0,1,0,1
                 on_release: root.create_new_number('Skip-Bo')      
-            
+
             Button:
                 text: "Score"
                 background_color: 1,0,0,1
@@ -2958,7 +3377,7 @@ WindowManager:
         cols: 1
         Label:
             text: '1. The blue rows represent your cards.\\n2. Select number from green rows.\\n3. Select your cards that have this value.\\n4. When done, click score to find score.'
-        
+
         GridLayout:
             cols: 5
 
@@ -3041,7 +3460,7 @@ WindowManager:
                 background_color: 0,0.5,1,1
                 on_release: 
                     root.change_text15()
-                    
+
         GridLayout:
             cols: 6
             Button:
@@ -3112,7 +3531,7 @@ WindowManager:
                 text: 'Skip\\n-Bo'
                 background_color: 0,1,0,1
                 on_release: root.create_new_number('Skip-Bo')      
-            
+
             Button:
                 text: "Score"
                 background_color: 1,0,0,1
@@ -3221,7 +3640,7 @@ WindowManager:
                 root.manager.transition.direction = "left"
         Label:
             text: ""
-                
+
 <Name2Window>
     name: "name2"
     GridLayout:
@@ -3241,7 +3660,7 @@ WindowManager:
                 id: p2
                 on_text: root.check_next(p1.text, p2.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -3251,23 +3670,22 @@ WindowManager:
                     app.root.current = "game2"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-        
-                
+
+
 <Game2PlayerWindow>
     name: "game2"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -3374,7 +3792,7 @@ WindowManager:
                 id: p3
                 on_text: root.check_next(p1.text, p2.text, p3.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -3384,22 +3802,21 @@ WindowManager:
                     app.root.current = "game3"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game3PlayerWindow>
     name: "game3"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -3494,7 +3911,7 @@ WindowManager:
                 on_release:
                     app.root.current = "rusure"
                     root.manager.transition.direction = "left"
-                
+
 <Name4Window>
     name: "name4"
     GridLayout:
@@ -3528,7 +3945,7 @@ WindowManager:
                 id: p4
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -3538,22 +3955,21 @@ WindowManager:
                     app.root.current = "game4"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text, p4.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game4PlayerWindow>
     name: "game4"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -3663,7 +4079,7 @@ WindowManager:
                 on_release:
                     app.root.current = "rusure"
                     root.manager.transition.direction = "left"
-                    
+
 <Name5Window>
     name: "name5"
     GridLayout:
@@ -3704,7 +4120,7 @@ WindowManager:
                 id: p5
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -3714,22 +4130,21 @@ WindowManager:
                     app.root.current = "game5"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text, p4.text, p5.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game5PlayerWindow>
     name: "game5"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -3902,7 +4317,7 @@ WindowManager:
                 id: p6
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -3912,22 +4327,21 @@ WindowManager:
                     app.root.current = "game6"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game6PlayerWindow>
     name: "game6"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -4067,7 +4481,7 @@ WindowManager:
                 on_release:
                     app.root.current = "rusure"
                     root.manager.transition.direction = "left"
-                    
+
 <Name7Window>
     name: "name7"
     GridLayout:
@@ -4122,7 +4536,7 @@ WindowManager:
                 id: p7
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -4132,22 +4546,21 @@ WindowManager:
                     app.root.current = "game7"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game7PlayerWindow>
     name: "game7"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -4302,7 +4715,7 @@ WindowManager:
                 on_release:
                     app.root.current = "rusure"
                     root.manager.transition.direction = "left"
-                    
+
 <Name8Window>
     name: "name8"
     GridLayout:
@@ -4364,7 +4777,7 @@ WindowManager:
                 id: p8
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -4374,22 +4787,21 @@ WindowManager:
                     app.root.current = "game8"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game8PlayerWindow>
     name: "game8"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -4628,7 +5040,7 @@ WindowManager:
                 id: p9
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -4638,22 +5050,21 @@ WindowManager:
                     app.root.current = "game9"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game9PlayerWindow>
     name: "game9"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -4838,7 +5249,7 @@ WindowManager:
                 on_release:
                     app.root.current = "rusure"
                     root.manager.transition.direction = "left"
-                    
+
 <Name10Window>
     name: "name10"
     GridLayout:
@@ -4914,7 +5325,7 @@ WindowManager:
                 id: p10
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -4924,22 +5335,21 @@ WindowManager:
                     app.root.current = "game10"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game10PlayerWindow>
     name: "game10"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -5139,7 +5549,7 @@ WindowManager:
                 on_release:
                     app.root.current = "rusure"
                     root.manager.transition.direction = "left"
-                    
+
 <Name11Window>
     name: "name11"
     GridLayout:
@@ -5222,7 +5632,7 @@ WindowManager:
                 id: p11
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -5232,22 +5642,21 @@ WindowManager:
                     app.root.current = "game11"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game11PlayerWindow>
     name: "game11"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -5462,7 +5871,7 @@ WindowManager:
                 on_release:
                     app.root.current = "rusure"
                     root.manager.transition.direction = "left"
-                
+
 <Name12Window>
     name: "name12"
     GridLayout:
@@ -5552,7 +5961,7 @@ WindowManager:
                 id: p12
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
         GridLayout:
-            cols:2
+            cols:3
             Button:
                 id: next
                 disabled: True
@@ -5562,22 +5971,21 @@ WindowManager:
                     app.root.current = "game12"
                     root.manager.transition.direction = "left"
             Button:
+                text: "Reset Names"
+                on_press:
+                    root.reset_names()
+            Button:
                 text: "Back"
                 on_press:
-                    root.back()
+                    root.back(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
                     app.root.current = "game"
                     root.manager.transition.direction = "right"
-                
+
 <Game12PlayerWindow>
     name: "game12"
     GridLayout:
         id: grid
         cols: 1
-        Button:
-            text: '       PRESS ME to        \\n       setup game.'
-            background_color: 0, 1, 0, 1
-            on_release: 
-                root.setup()
         GridLayout:
             cols: 3
             Button:
@@ -5822,7 +6230,7 @@ WindowManager:
                     app.root.current = "main"
                     root.manager.transition.direction = "right"
                     root.update_check(2)
-                    
+
             Button:
                 id: no
                 text: "No"
@@ -5841,10 +6249,77 @@ WindowManager:
                     elif self.text == "          No          ": app.root.current = "game12"
                     root.manager.transition.direction = "right"
 """)
+sm = ScreenManager()
+main = MainWindow(name = "main")
+whichscore = WhichScoreWindow(name = "whichscore")
+whichversion = WhichVersionWindow(name = "whichversion")
+help1 = Help1Window(name = "help")
+help2 = Help2Window(name = "help2")
+exit = ExitWindow(name = "exit")
+score = ScoreWindow(name = "score")
+score2 = Score2Window(name = "score2")
+game = GameWindow(name = "game")
+name2 = Name2Window(name = "name2")
+game2 = Game2PlayerWindow(name = "game2")
+name3 = Name3Window(name = "name3")
+game3 = Game3PlayerWindow(name = "game3")
+name4 = Name4Window(name = "name4")
+game4 = Game4PlayerWindow(name = "game4")
+name5 = Name5Window(name = "name5")
+game5 = Game5PlayerWindow(name = "game5")
+name6 = Name6Window(name = "name6")
+game6 = Game6PlayerWindow(name = "game6")
+name7 = Name7Window(name = "name7")
+game7 = Game7PlayerWindow(name = "game7")
+name8 = Name8Window(name = "name8")
+game8 = Game8PlayerWindow(name = "game8")
+name9 = Name9Window(name = "name9")
+game9 = Game9PlayerWindow(name = "game9")
+name10 = Name10Window(name = "name10")
+game10 = Game10PlayerWindow(name = "game10")
+name11 = Name11Window(name = "name11")
+game11 = Game11PlayerWindow(name = "game11")
+name12 = Name12Window(name = "name12")
+game12 = Game12PlayerWindow(name = "game12")
+rusure = AreYouSureWindow(name = "rusure")
+
+sm.add_widget(main)
+sm.add_widget(whichscore)
+sm.add_widget(whichversion)
+sm.add_widget(help1)
+sm.add_widget(help2)
+sm.add_widget(exit)
+sm.add_widget(score)
+sm.add_widget(score2)
+sm.add_widget(game)
+sm.add_widget(game2)
+sm.add_widget(game3)
+sm.add_widget(game4)
+sm.add_widget(game5)
+sm.add_widget(game6)
+sm.add_widget(game7)
+sm.add_widget(game8)
+sm.add_widget(game9)
+sm.add_widget(game10)
+sm.add_widget(game11)
+sm.add_widget(game12)
+sm.add_widget(name2)
+sm.add_widget(name3)
+sm.add_widget(name4)
+sm.add_widget(name5)
+sm.add_widget(name6)
+sm.add_widget(name7)
+sm.add_widget(name8)
+sm.add_widget(name9)
+sm.add_widget(name10)
+sm.add_widget(name11)
+sm.add_widget(name12)
+sm.add_widget(rusure)
 
 class MyMainApp(App):
     def build(self):
-        return kv
+        return sm
+
 
 if __name__ == "__main__":
     MyMainApp().run()
