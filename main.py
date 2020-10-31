@@ -6,26 +6,43 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
+from kivy.storage.jsonstore import JsonStore
 import sys
 
-players = 2
-check = 1
-wow = "13"
+store = JsonStore('Final_3.json')
+if store.exists("names"):
+    pass
+else:
+    store.put("names", p1n="", p2n="",p3n="", p4n="",p5n="", p6n="",p7n="", p8n="",p9n="", p10n="",p11n="", p12n="")
+    store.put("rpr", reset=1 ,players=2, check=1)
+    store.put("score", p1s="0", p2s="0", p3s="0", p4s="0",p5s="0", p6s="0", p7s="0", p8s="0",p9s="0", p10s="0", p11s="0", p12s="0")
+
+nms = store.get("names")
+names = [nms["p1n"],nms["p2n"],nms["p3n"],nms["p4n"],nms["p5n"],nms["p6n"],nms["p7n"],nms["p8n"],nms["p9n"],nms["p10n"],nms["p11n"],nms["p12n"]]
+rpr = store.get("rpr")
+reset = rpr["reset"]
+players = rpr["players"]
 round = 1
-names = ["","","","","","","","","","","",""]
-reset = 1
-p1s = ["0"]
-p2s = ["0"]
-p3s = ["0"]
-p4s = ["0"]
-p5s = ["0"]
-p6s = ["0"]
-p7s = ["0"]
-p8s = ["0"]
-p9s = ["0"]
-p10s = ["0"]
-p11s = ["0"]
-p12s = ["0"]
+check = rpr["check"]
+scores = store.get("score")
+p1s = (scores["p1s"])
+p2s = (scores["p2s"])
+p3s = (scores["p3s"])
+p4s = (scores["p4s"])
+p5s = (scores["p5s"])
+p6s = (scores["p6s"])
+p7s = (scores["p7s"])
+p8s = (scores["p8s"])
+p9s = (scores["p9s"])
+p10s = (scores["p10s"])
+p11s = (scores["p11s"])
+p12s = (scores["p12s"])
+# print(names)
+# # print(rpr)
+# # print(scores)
+# # print(p1s)
+
+wow = "13"
 
 
 class MainWindow(Screen):
@@ -33,29 +50,32 @@ class MainWindow(Screen):
         global players
         global check
         if check == 1:
-            self.ids.resume.text = "Resume Game"
-        elif check == 2:
-            self.ids.resume.text = " Resume Game "
-        elif check == 3:
-            self.ids.resume.text = "  Resume Game  "
-        elif check == 4:
-            self.ids.resume.text = "   Resume Game   "
-        elif check == 5:
-            self.ids.resume.text = "    Resume Game    "
-        elif check == 6:
-            self.ids.resume.text = "     Resume Game     "
-        elif check == 7:
-            self.ids.resume.text = "      Resume Game      "
-        elif check == 8:
-            self.ids.resume.text = "       Resume Game       "
-        elif check == 9:
-            self.ids.resume.text = "        Resume Game        "
-        elif check == 10:
-            self.ids.resume.text = "         Resume Game         "
-        elif check == 11:
-            self.ids.resume.text = "          Resume Game          "
-        elif check == 12:
-            self.ids.resume.text = "           Resume Game           "
+            sm.current = "game"
+        else:
+            if players == 2:
+                sm.current = "game2"
+            if players == 3:
+                sm.current = "game3"
+            if players == 4:
+                sm.current = "game4"
+            if players == 5:
+                sm.current = "game5"
+            if players == 6:
+                sm.current = "game6"
+            if players == 7:
+                sm.current = "game7"
+            if players == 8:
+                sm.current = "game8"
+            if players == 9:
+                sm.current = "game9"
+            if players == 10:
+                sm.current = "game10"
+            if players == 11:
+                sm.current = "game11"
+            if players == 12:
+                sm.current = "game12"
+        sm.transition.direction = 'left'
+        self.update_rpr()
 
     def __init__(self, **kwargs):
         super(MainWindow, self).__init__(**kwargs)
@@ -63,17 +83,78 @@ class MainWindow(Screen):
 
     def Android_back_click(self, window, key, *largs):
         if key == 27:
-            if self.manager.current == 'main' or self.manager.current == "rusure":
+            if sm.current == 'main':
                 pass
-            elif self.manager.current == "name2" or self.manager.current == "name3" or self.manager.current == "name4" or self.manager.current == "name5" or self.manager.current == "name6" or self.manager.current == "name7" or self.manager.current == "name8" or self.manager.current == "name9" or self.manager.current == "name10" or self.manager.current == "name11" or self.manager.current == "name12":
-                global check
-                check = 1
-                self.manager.current = 'game'
-                self.manager.transition.direction = 'right'
+            elif sm.current == "name2" or self.manager.current == "name3" or self.manager.current == "name4" or self.manager.current == "name5" or self.manager.current == "name6" or self.manager.current == "name7" or self.manager.current == "name8" or self.manager.current == "name9" or self.manager.current == "name10" or self.manager.current == "name11" or self.manager.current == "name12":
+                sm.current = 'game'
+                sm.transition.direction = 'right'
             else:
-                self.manager.current = 'main'
-                self.manager.transition.direction = 'right'
+                sm.current = 'main'
+                sm.transition.direction = 'right'
             return True
+    def update_names(self):
+        global names
+        name2.update_names()
+        name3.update_names()
+        name4.update_names()
+        name5.update_names()
+        name6.update_names()
+        name7.update_names()
+        name8.update_names()
+        name9.update_names()
+        name10.update_names()
+        name11.update_names()
+        name12.update_names()
+        store.put("names", p1n=names[0], p2n=names[1],p3n=names[2], p4n=names[3],p5n=names[4], p6n=names[5],p7n=names[6], p8n=names[7],p9n=names[8], p10n=names[9],p11n=names[10], p12n=names[11])
+
+    def update_scores(self, x):
+        global players
+        global reset
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global p6s
+        global p7s
+        global p8s
+        global p9s
+        global p10s
+        global p11s
+        global p12s
+
+        if x == 1:
+            if reset != 1:
+                if players == 2:
+                    game2.initialize()
+                elif players == 3:
+                    game3.initialize()
+                elif players == 4:
+                    game4.initialize()
+                elif players == 5:
+                    game5.initialize()
+                elif players == 6:
+                    game6.initialize()
+                elif players == 7:
+                    game7.initialize()
+                elif players == 8:
+                    game8.initialize()
+                elif players == 9:
+                    game9.initialize()
+                elif players == 10:
+                    game10.initialize()
+                elif players == 11:
+                    game11.initialize()
+                elif players == 12:
+                    game12.initialize()
+        elif x == 2:
+            store.put("score", p1s=p1s, p2s=p2s, p3s=p3s, p4s=p4s, p5s=p5s, p6s=p6s, p7s=p7s, p8s=p8s, p9s=p9s, p10s=p10s, p11s=p11s, p12s=p12s)
+
+    def update_rpr(self):
+        global reset
+        global players
+        global check
+        store.put("rpr", reset=reset, players=players, check=check)
 
 
 class WhichScoreWindow(Screen):
@@ -238,30 +319,8 @@ class ScoreWindow(Screen):
         popupWindow.open()
 
     def check_check(self):
-        if check == 1:
-            self.ids.gotogame.text = "Game"
-        elif check == 2:
-            self.ids.gotogame.text = " Game "
-        elif check == 3:
-            self.ids.gotogame.text = "  Game  "
-        elif check == 4:
-            self.ids.gotogame.text = "   Game   "
-        elif check == 5:
-            self.ids.gotogame.text = "    Game    "
-        elif check == 6:
-            self.ids.gotogame.text = "     Game     "
-        elif check == 7:
-            self.ids.gotogame.text = "      Game      "
-        elif check == 8:
-            self.ids.gotogame.text = "       Game       "
-        elif check == 9:
-            self.ids.gotogame.text = "        Game        "
-        elif check == 10:
-            self.ids.gotogame.text = "         Game         "
-        elif check == 11:
-            self.ids.gotogame.text = "          Game          "
-        elif check == 12:
-            self.ids.gotogame.text = "           Game           "
+        main.check_check()
+        self.manager.transition.direction = 'down'
 
 
 class Score2Window(Screen):
@@ -499,30 +558,8 @@ class Score2Window(Screen):
         popupWindow.open()
 
     def check_check(self):
-        if check == 1:
-            self.ids.gotogame.text = "Game"
-        elif check == 2:
-            self.ids.gotogame.text = " Game "
-        elif check == 3:
-            self.ids.gotogame.text = "  Game  "
-        elif check == 4:
-            self.ids.gotogame.text = "   Game   "
-        elif check == 5:
-            self.ids.gotogame.text = "    Game    "
-        elif check == 6:
-            self.ids.gotogame.text = "     Game     "
-        elif check == 7:
-            self.ids.gotogame.text = "      Game      "
-        elif check == 8:
-            self.ids.gotogame.text = "       Game       "
-        elif check == 9:
-            self.ids.gotogame.text = "        Game        "
-        elif check == 10:
-            self.ids.gotogame.text = "         Game         "
-        elif check == 11:
-            self.ids.gotogame.text = "          Game          "
-        elif check == 12:
-            self.ids.gotogame.text = "           Game           "
+        main.check_check()
+        self.manager.transition.direction = 'down'
 
 
 class GameWindow(Screen):
@@ -532,80 +569,53 @@ class GameWindow(Screen):
             if players > 2:
                 players -= 1
                 self.ids.players.text = str(players)
-        else:
+        elif x == 2:
             if players < 12:
                 players += 1
                 self.ids.players.text = str(players)
+        elif x == 3:
+            self.ids.players.text = str(players)
+        main.update_rpr()
 
-    def update_check(self):
-        global check
+    def next(self):
         global players
         if players == 2:
-            check = 2
-            self.ids.start.text = "Next"
-        elif players == 3:
-            check = 3
-            self.ids.start.text = " Next "
-        elif players == 4:
-            check = 4
-            self.ids.start.text = "  Next  "
-        elif players == 5:
-            check = 5
-            self.ids.start.text = "   Next   "
-        elif players == 6:
-            check = 6
-            self.ids.start.text = "    Next    "
-        elif players == 7:
-            check = 7
-            self.ids.start.text = "     Next     "
-        elif players == 8:
-            check = 8
-            self.ids.start.text = "      Next      "
-        elif players == 9:
-            check = 9
-            self.ids.start.text = "       Next       "
-        elif players == 10:
-            check = 10
-            self.ids.start.text = "        Next        "
-        elif players == 11:
-            check = 11
-            self.ids.start.text = "         Next         "
-        elif players == 12:
-            check = 12
-            self.ids.start.text = "          Next          "
-        name2.update_names()
-        name3.update_names()
-        name4.update_names()
-        name5.update_names()
-        name6.update_names()
-        name7.update_names()
-        name8.update_names()
-        name9.update_names()
-        name10.update_names()
-        name11.update_names()
-        name12.update_names()
-
-    def update_names(self):
-        name2.update_names()
-        name3.update_names()
-        name4.update_names()
-        name5.update_names()
-        name6.update_names()
-        name7.update_names()
-        name8.update_names()
-        name9.update_names()
-        name10.update_names()
-        name11.update_names()
-        name12.update_names()
+            sm.current = "name2"
+        if players == 3:
+            sm.current = "name3"
+        if players == 4:
+            sm.current = "name4"
+        if players == 5:
+            sm.current = "name5"
+        if players == 6:
+            sm.current = "name6"
+        if players == 7:
+            sm.current = "name7"
+        if players == 8:
+            sm.current = "name8"
+        if players == 9:
+            sm.current = "name9"
+        if players == 10:
+            sm.current = "name10"
+        if players == 11:
+            sm.current = "name11"
+        if players == 12:
+            sm.current = "name12"
+        sm.transition.direction = "left"
+        main.update_names()
 
 
 class Name2Window(Screen):
     def start_game(self, a, b):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b]
         for n in range(len(list)):
             names[n] = str(list[n])
         game2.setup()
+        main.update_names()
 
     def check_next(self, t1, t2):
         if t1 != "" and t2 != "":
@@ -616,11 +626,12 @@ class Name2Window(Screen):
     def back(self, a, b):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -632,27 +643,29 @@ class Name2Window(Screen):
         names = ["","","","","","","","","","","",""]
         self.ids.p1.text = names[0]
         self.ids.p2.text = names[1]
+        main.update_names()
 
 
 class Game2PlayerWindow(Screen):
     def setup(self):
-        global name
+        global names
         global round
         global reset
         global p1s
         global p2s
         self.ids.p1n.text = names[0]
         self.ids.p2n.text = names[1]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            p1s = [0]
-            p2s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        p1s = [0]
+        p2s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -689,7 +702,7 @@ class Game2PlayerWindow(Screen):
                 s[n] = int(s[n])
                 p1s[round - 1] = s[0]
                 p2s[round - 1] = s[1]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
         if y == 2:
@@ -703,6 +716,7 @@ class Game2PlayerWindow(Screen):
         self.ids.p2.text = ""
         self.ids.score1.text = str(score1)
         self.ids.score2.text = str(score2)
+        main.update_scores(2)
 
     def check_next(self, t1, t2):
         global round
@@ -724,14 +738,46 @@ class Game2PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global round
+
+        score1 = 0
+        score2 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name3Window(Screen):
     def start_game(self, a, b, c):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b, c]
         for n in range(len(list)):
             names[n] = str(list[n])
         game3.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3):
         if t1 != "" and t2 != "" and t3 != "":
@@ -742,11 +788,12 @@ class Name3Window(Screen):
     def back(self, a, b, c):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -760,6 +807,7 @@ class Name3Window(Screen):
         self.ids.p1.text = names[0]
         self.ids.p2.text = names[1]
         self.ids.p3.text = names[2]
+        main.update_names()
 
 
 class Game3PlayerWindow(Screen):
@@ -773,19 +821,20 @@ class Game3PlayerWindow(Screen):
         self.ids.p1n.text = names[0]
         self.ids.p2n.text = names[1]
         self.ids.p3n.text = names[2]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -828,7 +877,7 @@ class Game3PlayerWindow(Screen):
                 p1s[round - 1] = s[0]
                 p2s[round - 1] = s[1]
                 p3s[round - 1] = s[2]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -847,6 +896,7 @@ class Game3PlayerWindow(Screen):
         self.ids.score1.text = str(score1)
         self.ids.score2.text = str(score2)
         self.ids.score3.text = str(score3)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3):
         global round
@@ -868,14 +918,52 @@ class Game3PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name4Window(Screen):
     def start_game(self, a, b, c, d):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b, c, d]
         for n in range(len(list)):
             names[n] = str(list[n])
         game4.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3, t4):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "":
@@ -886,11 +974,12 @@ class Name4Window(Screen):
     def back(self, a, b, c, d):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c, d]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -906,6 +995,7 @@ class Name4Window(Screen):
         self.ids.p2.text = names[1]
         self.ids.p3.text = names[2]
         self.ids.p4.text = names[3]
+        main.update_names()
 
 
 class Game4PlayerWindow(Screen):
@@ -921,22 +1011,23 @@ class Game4PlayerWindow(Screen):
         self.ids.p2n.text = names[1]
         self.ids.p3n.text = names[2]
         self.ids.p4n.text = names[3]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.p4.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            self.ids.score4.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            p4s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        self.ids.score4.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        p4s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -985,7 +1076,7 @@ class Game4PlayerWindow(Screen):
                 p2s[round - 1] = s[1]
                 p3s[round - 1] = s[2]
                 p4s[round - 1] = s[3]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1009,6 +1100,7 @@ class Game4PlayerWindow(Screen):
         self.ids.score2.text = str(score2)
         self.ids.score3.text = str(score3)
         self.ids.score4.text = str(score4)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3, t4):
         global round
@@ -1030,14 +1122,58 @@ class Game4PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+        score4 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+        self.ids.p4n.text = names[3]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+            score4 += int(p4s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+        self.ids.score4.text = str(score4)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name5Window(Screen):
     def start_game(self, a, b, c, d, e):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b, c, d, e]
         for n in range(len(list)):
             names[n] = str(list[n])
         game5.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3, t4, t5):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "":
@@ -1048,11 +1184,12 @@ class Name5Window(Screen):
     def back(self, a, b, c, d, e):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c, d, e]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -1070,6 +1207,7 @@ class Name5Window(Screen):
         self.ids.p3.text = names[2]
         self.ids.p4.text = names[3]
         self.ids.p5.text = names[4]
+        main.update_names()
 
 
 class Game5PlayerWindow(Screen):
@@ -1087,25 +1225,26 @@ class Game5PlayerWindow(Screen):
         self.ids.p3n.text = names[2]
         self.ids.p4n.text = names[3]
         self.ids.p5n.text = names[4]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.p4.text = ""
-            self.ids.p5.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            self.ids.score4.text = ""
-            self.ids.score5.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            p4s = [0]
-            p5s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        self.ids.score4.text = ""
+        self.ids.score5.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        p4s = [0]
+        p5s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -1160,7 +1299,7 @@ class Game5PlayerWindow(Screen):
                 p3s[round - 1] = s[2]
                 p4s[round - 1] = s[3]
                 p5s[round - 1] = s[4]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1189,6 +1328,7 @@ class Game5PlayerWindow(Screen):
         self.ids.score3.text = str(score3)
         self.ids.score4.text = str(score4)
         self.ids.score5.text = str(score5)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3, t4, t5):
         global round
@@ -1210,14 +1350,64 @@ class Game5PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+        score4 = 0
+        score5 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+        self.ids.p4n.text = names[3]
+        self.ids.p5n.text = names[4]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+            score4 += int(p4s[n])
+            score5 += int(p5s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+        self.ids.score4.text = str(score4)
+        self.ids.score5.text = str(score5)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name6Window(Screen):
     def start_game(self, a, b, c, d, e, f):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b, c, d, e, f]
         for n in range(len(list)):
             names[n] = str(list[n])
         game6.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3, t4, t5, t6):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "":
@@ -1228,11 +1418,12 @@ class Name6Window(Screen):
     def back(self, a, b, c, d, e, f):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c, d, e, f]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -1252,6 +1443,7 @@ class Name6Window(Screen):
         self.ids.p4.text = names[3]
         self.ids.p5.text = names[4]
         self.ids.p6.text = names[5]
+        main.update_names()
 
 
 class Game6PlayerWindow(Screen):
@@ -1271,28 +1463,29 @@ class Game6PlayerWindow(Screen):
         self.ids.p4n.text = names[3]
         self.ids.p5n.text = names[4]
         self.ids.p6n.text = names[5]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.p4.text = ""
-            self.ids.p5.text = ""
-            self.ids.p6.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            self.ids.score4.text = ""
-            self.ids.score5.text = ""
-            self.ids.score6.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            p4s = [0]
-            p5s = [0]
-            p6s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        self.ids.score4.text = ""
+        self.ids.score5.text = ""
+        self.ids.score6.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        p4s = [0]
+        p5s = [0]
+        p6s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -1353,7 +1546,7 @@ class Game6PlayerWindow(Screen):
                 p4s[round - 1] = s[3]
                 p5s[round - 1] = s[4]
                 p6s[round - 1] = s[5]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1387,6 +1580,7 @@ class Game6PlayerWindow(Screen):
         self.ids.score4.text = str(score4)
         self.ids.score5.text = str(score5)
         self.ids.score6.text = str(score6)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3, t4, t5, t6):
         global round
@@ -1408,14 +1602,70 @@ class Game6PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global p6s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+        score4 = 0
+        score5 = 0
+        score6 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+        self.ids.p4n.text = names[3]
+        self.ids.p5n.text = names[4]
+        self.ids.p6n.text = names[5]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+            score4 += int(p4s[n])
+            score5 += int(p5s[n])
+            score6 += int(p6s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+        self.ids.score4.text = str(score4)
+        self.ids.score5.text = str(score5)
+        self.ids.score6.text = str(score6)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name7Window(Screen):
     def start_game(self, a, b, c, d, e, f, g):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b, c, d, e, f, g]
         for n in range(len(list)):
             names[n] = str(list[n])
         game7.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "":
@@ -1426,11 +1676,12 @@ class Name7Window(Screen):
     def back(self, a, b, c, d, e, f, g):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c, d, e, f, g]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -1452,6 +1703,7 @@ class Name7Window(Screen):
         self.ids.p5.text = names[4]
         self.ids.p6.text = names[5]
         self.ids.p7.text = names[6]
+        main.update_names()
 
 
 class Game7PlayerWindow(Screen):
@@ -1473,31 +1725,32 @@ class Game7PlayerWindow(Screen):
         self.ids.p5n.text = names[4]
         self.ids.p6n.text = names[5]
         self.ids.p7n.text = names[6]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.p4.text = ""
-            self.ids.p5.text = ""
-            self.ids.p6.text = ""
-            self.ids.p7.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            self.ids.score4.text = ""
-            self.ids.score5.text = ""
-            self.ids.score6.text = ""
-            self.ids.score7.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            p4s = [0]
-            p5s = [0]
-            p6s = [0]
-            p7s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        self.ids.score4.text = ""
+        self.ids.score5.text = ""
+        self.ids.score6.text = ""
+        self.ids.score7.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        p4s = [0]
+        p5s = [0]
+        p6s = [0]
+        p7s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -1564,7 +1817,7 @@ class Game7PlayerWindow(Screen):
                 p5s[round - 1] = s[4]
                 p6s[round - 1] = s[5]
                 p7s[round - 1] = s[6]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1603,6 +1856,7 @@ class Game7PlayerWindow(Screen):
         self.ids.score5.text = str(score5)
         self.ids.score6.text = str(score6)
         self.ids.score7.text = str(score7)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7):
         global round
@@ -1624,14 +1878,76 @@ class Game7PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global p6s
+        global p7s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+        score4 = 0
+        score5 = 0
+        score6 = 0
+        score7 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+        self.ids.p4n.text = names[3]
+        self.ids.p5n.text = names[4]
+        self.ids.p6n.text = names[5]
+        self.ids.p7n.text = names[6]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+            score4 += int(p4s[n])
+            score5 += int(p5s[n])
+            score6 += int(p6s[n])
+            score7 += int(p7s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+        self.ids.score4.text = str(score4)
+        self.ids.score5.text = str(score5)
+        self.ids.score6.text = str(score6)
+        self.ids.score7.text = str(score7)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name8Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b, c, d, e, f, g, h]
         for n in range(len(list)):
             names[n] = str(list[n])
         game8.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "":
@@ -1642,11 +1958,12 @@ class Name8Window(Screen):
     def back(self, a, b, c, d, e, f, g, h):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c, d, e, f, g, h]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -1670,6 +1987,7 @@ class Name8Window(Screen):
         self.ids.p6.text = names[5]
         self.ids.p7.text = names[6]
         self.ids.p8.text = names[7]
+        main.update_names()
 
 
 class Game8PlayerWindow(Screen):
@@ -1693,34 +2011,35 @@ class Game8PlayerWindow(Screen):
         self.ids.p6n.text = names[5]
         self.ids.p7n.text = names[6]
         self.ids.p8n.text = names[7]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.p4.text = ""
-            self.ids.p5.text = ""
-            self.ids.p6.text = ""
-            self.ids.p7.text = ""
-            self.ids.p8.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            self.ids.score4.text = ""
-            self.ids.score5.text = ""
-            self.ids.score6.text = ""
-            self.ids.score7.text = ""
-            self.ids.score8.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            p4s = [0]
-            p5s = [0]
-            p6s = [0]
-            p7s = [0]
-            p8s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        self.ids.score4.text = ""
+        self.ids.score5.text = ""
+        self.ids.score6.text = ""
+        self.ids.score7.text = ""
+        self.ids.score8.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        p4s = [0]
+        p5s = [0]
+        p6s = [0]
+        p7s = [0]
+        p8s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -1793,7 +2112,7 @@ class Game8PlayerWindow(Screen):
                 p6s[round - 1] = s[5]
                 p7s[round - 1] = s[6]
                 p8s[round - 1] = s[7]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -1837,6 +2156,7 @@ class Game8PlayerWindow(Screen):
         self.ids.score6.text = str(score6)
         self.ids.score7.text = str(score7)
         self.ids.score8.text = str(score8)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8):
         global round
@@ -1858,14 +2178,82 @@ class Game8PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global p6s
+        global p7s
+        global p8s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+        score4 = 0
+        score5 = 0
+        score6 = 0
+        score7 = 0
+        score8 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+        self.ids.p4n.text = names[3]
+        self.ids.p5n.text = names[4]
+        self.ids.p6n.text = names[5]
+        self.ids.p7n.text = names[6]
+        self.ids.p8n.text = names[7]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+            score4 += int(p4s[n])
+            score5 += int(p5s[n])
+            score6 += int(p6s[n])
+            score7 += int(p7s[n])
+            score8 += int(p8s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+        self.ids.score4.text = str(score4)
+        self.ids.score5.text = str(score5)
+        self.ids.score6.text = str(score6)
+        self.ids.score7.text = str(score7)
+        self.ids.score8.text = str(score8)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name9Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h, i):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b, c, d, e, f, g, h, i]
         for n in range(len(list)):
             names[n] = str(list[n])
         game9.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "" and t9 != "":
@@ -1876,11 +2264,12 @@ class Name9Window(Screen):
     def back(self, a, b, c, d, e, f, g, h, i):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c, d, e, f, g, h, i]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -1906,6 +2295,7 @@ class Name9Window(Screen):
         self.ids.p7.text = names[6]
         self.ids.p8.text = names[7]
         self.ids.p9.text = names[8]
+        main.update_names()
 
 
 class Game9PlayerWindow(Screen):
@@ -1931,37 +2321,38 @@ class Game9PlayerWindow(Screen):
         self.ids.p7n.text = names[6]
         self.ids.p8n.text = names[7]
         self.ids.p9n.text = names[8]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.p4.text = ""
-            self.ids.p5.text = ""
-            self.ids.p6.text = ""
-            self.ids.p7.text = ""
-            self.ids.p8.text = ""
-            self.ids.p9.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            self.ids.score4.text = ""
-            self.ids.score5.text = ""
-            self.ids.score6.text = ""
-            self.ids.score7.text = ""
-            self.ids.score8.text = ""
-            self.ids.score9.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            p4s = [0]
-            p5s = [0]
-            p6s = [0]
-            p7s = [0]
-            p8s = [0]
-            p9s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.p9.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        self.ids.score4.text = ""
+        self.ids.score5.text = ""
+        self.ids.score6.text = ""
+        self.ids.score7.text = ""
+        self.ids.score8.text = ""
+        self.ids.score9.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        p4s = [0]
+        p5s = [0]
+        p6s = [0]
+        p7s = [0]
+        p8s = [0]
+        p9s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -2040,7 +2431,7 @@ class Game9PlayerWindow(Screen):
                 p7s[round - 1] = s[6]
                 p8s[round - 1] = s[7]
                 p9s[round - 1] = s[8]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -2089,6 +2480,7 @@ class Game9PlayerWindow(Screen):
         self.ids.score7.text = str(score7)
         self.ids.score8.text = str(score8)
         self.ids.score9.text = str(score9)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9):
         global round
@@ -2110,14 +2502,88 @@ class Game9PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global p6s
+        global p7s
+        global p8s
+        global p9s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+        score4 = 0
+        score5 = 0
+        score6 = 0
+        score7 = 0
+        score8 = 0
+        score9 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+        self.ids.p4n.text = names[3]
+        self.ids.p5n.text = names[4]
+        self.ids.p6n.text = names[5]
+        self.ids.p7n.text = names[6]
+        self.ids.p8n.text = names[7]
+        self.ids.p9n.text = names[8]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+            score4 += int(p4s[n])
+            score5 += int(p5s[n])
+            score6 += int(p6s[n])
+            score7 += int(p7s[n])
+            score8 += int(p8s[n])
+            score9 += int(p9s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.p9.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+        self.ids.score4.text = str(score4)
+        self.ids.score5.text = str(score5)
+        self.ids.score6.text = str(score6)
+        self.ids.score7.text = str(score7)
+        self.ids.score8.text = str(score8)
+        self.ids.score9.text = str(score9)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name10Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h, i, j):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b, c, d, e, f, g, h, i, j]
         for n in range(len(list)):
             names[n] = str(list[n])
         game10.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "" and t9 != "" and t10 != "":
@@ -2128,11 +2594,12 @@ class Name10Window(Screen):
     def back(self, a, b, c, d, e, f, g, h, i, j):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c, d, e, f, g, h, i, j]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -2160,6 +2627,7 @@ class Name10Window(Screen):
         self.ids.p8.text = names[7]
         self.ids.p9.text = names[8]
         self.ids.p10.text = names[9]
+        main.update_names()
 
 
 class Game10PlayerWindow(Screen):
@@ -2187,40 +2655,41 @@ class Game10PlayerWindow(Screen):
         self.ids.p8n.text = names[7]
         self.ids.p9n.text = names[8]
         self.ids.p10n.text = names[9]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.p4.text = ""
-            self.ids.p5.text = ""
-            self.ids.p6.text = ""
-            self.ids.p7.text = ""
-            self.ids.p8.text = ""
-            self.ids.p9.text = ""
-            self.ids.p10.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            self.ids.score4.text = ""
-            self.ids.score5.text = ""
-            self.ids.score6.text = ""
-            self.ids.score7.text = ""
-            self.ids.score8.text = ""
-            self.ids.score9.text = ""
-            self.ids.score10.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            p4s = [0]
-            p5s = [0]
-            p6s = [0]
-            p7s = [0]
-            p8s = [0]
-            p9s = [0]
-            p10s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.p9.text = ""
+        self.ids.p10.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        self.ids.score4.text = ""
+        self.ids.score5.text = ""
+        self.ids.score6.text = ""
+        self.ids.score7.text = ""
+        self.ids.score8.text = ""
+        self.ids.score9.text = ""
+        self.ids.score10.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        p4s = [0]
+        p5s = [0]
+        p6s = [0]
+        p7s = [0]
+        p8s = [0]
+        p9s = [0]
+        p10s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -2305,7 +2774,7 @@ class Game10PlayerWindow(Screen):
                 p8s[round - 1] = s[7]
                 p9s[round - 1] = s[8]
                 p10s[round - 1] = s[9]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -2359,6 +2828,7 @@ class Game10PlayerWindow(Screen):
         self.ids.score8.text = str(score8)
         self.ids.score9.text = str(score9)
         self.ids.score10.text = str(score10)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10):
         global round
@@ -2380,14 +2850,94 @@ class Game10PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global p6s
+        global p7s
+        global p8s
+        global p9s
+        global p10s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+        score4 = 0
+        score5 = 0
+        score6 = 0
+        score7 = 0
+        score8 = 0
+        score9 = 0
+        score10 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+        self.ids.p4n.text = names[3]
+        self.ids.p5n.text = names[4]
+        self.ids.p6n.text = names[5]
+        self.ids.p7n.text = names[6]
+        self.ids.p8n.text = names[7]
+        self.ids.p9n.text = names[8]
+        self.ids.p10n.text = names[9]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+            score4 += int(p4s[n])
+            score5 += int(p5s[n])
+            score6 += int(p6s[n])
+            score7 += int(p7s[n])
+            score8 += int(p8s[n])
+            score9 += int(p9s[n])
+            score10 += int(p10s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.p9.text = ""
+        self.ids.p10.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+        self.ids.score4.text = str(score4)
+        self.ids.score5.text = str(score5)
+        self.ids.score6.text = str(score6)
+        self.ids.score7.text = str(score7)
+        self.ids.score8.text = str(score8)
+        self.ids.score9.text = str(score9)
+        self.ids.score10.text = str(score10)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name11Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h, i, j, k):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         list = [a, b, c, d, e, f, g, h, i, j, k]
         for n in range(len(list)):
             names[n] = str(list[n])
         game11.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "" and t9 != "" and t10 != "" and t11 != "":
@@ -2398,11 +2948,12 @@ class Name11Window(Screen):
     def back(self, a, b, c, d, e, f, g, h, i, j, k):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c, d, e, f, g, h, i, j, k]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -2432,6 +2983,7 @@ class Name11Window(Screen):
         self.ids.p9.text = names[8]
         self.ids.p10.text = names[9]
         self.ids.p11.text = names[10]
+        main.update_names()
 
 
 class Game11PlayerWindow(Screen):
@@ -2461,43 +3013,44 @@ class Game11PlayerWindow(Screen):
         self.ids.p9n.text = names[8]
         self.ids.p10n.text = names[9]
         self.ids.p11n.text = names[10]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.p4.text = ""
-            self.ids.p5.text = ""
-            self.ids.p6.text = ""
-            self.ids.p7.text = ""
-            self.ids.p8.text = ""
-            self.ids.p9.text = ""
-            self.ids.p10.text = ""
-            self.ids.p11.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            self.ids.score4.text = ""
-            self.ids.score5.text = ""
-            self.ids.score6.text = ""
-            self.ids.score7.text = ""
-            self.ids.score8.text = ""
-            self.ids.score9.text = ""
-            self.ids.score10.text = ""
-            self.ids.score11.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            p4s = [0]
-            p5s = [0]
-            p6s = [0]
-            p7s = [0]
-            p8s = [0]
-            p9s = [0]
-            p10s = [0]
-            p11s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.p9.text = ""
+        self.ids.p10.text = ""
+        self.ids.p11.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        self.ids.score4.text = ""
+        self.ids.score5.text = ""
+        self.ids.score6.text = ""
+        self.ids.score7.text = ""
+        self.ids.score8.text = ""
+        self.ids.score9.text = ""
+        self.ids.score10.text = ""
+        self.ids.score11.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        p4s = [0]
+        p5s = [0]
+        p6s = [0]
+        p7s = [0]
+        p8s = [0]
+        p9s = [0]
+        p10s = [0]
+        p11s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -2588,7 +3141,7 @@ class Game11PlayerWindow(Screen):
                 p9s[round - 1] = s[8]
                 p10s[round - 1] = s[9]
                 p11s[round - 1] = s[10]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -2647,6 +3200,7 @@ class Game11PlayerWindow(Screen):
         self.ids.score9.text = str(score9)
         self.ids.score10.text = str(score10)
         self.ids.score11.text = str(score11)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11):
         global round
@@ -2668,12 +3222,98 @@ class Game11PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global p6s
+        global p7s
+        global p8s
+        global p9s
+        global p10s
+        global p11s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+        score4 = 0
+        score5 = 0
+        score6 = 0
+        score7 = 0
+        score8 = 0
+        score9 = 0
+        score10 = 0
+        score11 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+        self.ids.p4n.text = names[3]
+        self.ids.p5n.text = names[4]
+        self.ids.p6n.text = names[5]
+        self.ids.p7n.text = names[6]
+        self.ids.p8n.text = names[7]
+        self.ids.p9n.text = names[8]
+        self.ids.p10n.text = names[9]
+        self.ids.p11n.text = names[10]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+            score4 += int(p4s[n])
+            score5 += int(p5s[n])
+            score6 += int(p6s[n])
+            score7 += int(p7s[n])
+            score8 += int(p8s[n])
+            score9 += int(p9s[n])
+            score10 += int(p10s[n])
+            score11 += int(p11s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.p9.text = ""
+        self.ids.p10.text = ""
+        self.ids.p11.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+        self.ids.score4.text = str(score4)
+        self.ids.score5.text = str(score5)
+        self.ids.score6.text = str(score6)
+        self.ids.score7.text = str(score7)
+        self.ids.score8.text = str(score8)
+        self.ids.score9.text = str(score9)
+        self.ids.score10.text = str(score10)
+        self.ids.score11.text = str(score11)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class Name12Window(Screen):
     def start_game(self, a, b, c, d, e, f, g, h, i, j, k, l):
         global names
+        global check
+        check = 2
+        main.update_rpr()
         names = [str(a), str(b), str(c), str(d), str(e), str(f), str(g), str(h), str(i), str(j), str(k), str(l)]
         game12.setup()
+        main.update_names()
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12):
         if t1 != "" and t2 != "" and t3 != "" and t4 != "" and t5 != "" and t6 != "" and t7 != "" and t8 != "" and t9 != "" and t10 != "" and t11 != "" and t12 != "":
@@ -2684,11 +3324,12 @@ class Name12Window(Screen):
     def back(self, a, b, c, d, e, f, g, h, i, j, k, l):
         global check
         check = 1
+        main.update_rpr()
         global names
         list = [a, b, c, d, e, f, g, h, i, j, k, l]
         for n in range(len(list)):
             names[n] = str(list[n])
-        game.update_names()
+        main.update_names()
 
     def update_names(self):
         global names
@@ -2720,6 +3361,7 @@ class Name12Window(Screen):
         self.ids.p10.text = names[9]
         self.ids.p11.text = names[10]
         self.ids.p12.text = names[11]
+        main.update_names()
 
 
 
@@ -2752,46 +3394,47 @@ class Game12PlayerWindow(Screen):
         self.ids.p10n.text = names[9]
         self.ids.p11n.text = names[10]
         self.ids.p12n.text = names[11]
-        if reset == 1:
-            self.ids.p1.text = ""
-            self.ids.p2.text = ""
-            self.ids.p3.text = ""
-            self.ids.p4.text = ""
-            self.ids.p5.text = ""
-            self.ids.p6.text = ""
-            self.ids.p7.text = ""
-            self.ids.p8.text = ""
-            self.ids.p9.text = ""
-            self.ids.p10.text = ""
-            self.ids.p11.text = ""
-            self.ids.p12.text = ""
-            self.ids.score1.text = ""
-            self.ids.score2.text = ""
-            self.ids.score3.text = ""
-            self.ids.score4.text = ""
-            self.ids.score5.text = ""
-            self.ids.score6.text = ""
-            self.ids.score7.text = ""
-            self.ids.score8.text = ""
-            self.ids.score9.text = ""
-            self.ids.score10.text = ""
-            self.ids.score11.text = ""
-            self.ids.score12.text = ""
-            p1s = [0]
-            p2s = [0]
-            p3s = [0]
-            p4s = [0]
-            p5s = [0]
-            p6s = [0]
-            p7s = [0]
-            p8s = [0]
-            p9s = [0]
-            p10s = [0]
-            p11s = [0]
-            p12s = [0]
-            round = 1
-            self.ids.round.text = "Round 1"
-            reset = 2
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.p9.text = ""
+        self.ids.p10.text = ""
+        self.ids.p11.text = ""
+        self.ids.p12.text = ""
+        self.ids.score1.text = ""
+        self.ids.score2.text = ""
+        self.ids.score3.text = ""
+        self.ids.score4.text = ""
+        self.ids.score5.text = ""
+        self.ids.score6.text = ""
+        self.ids.score7.text = ""
+        self.ids.score8.text = ""
+        self.ids.score9.text = ""
+        self.ids.score10.text = ""
+        self.ids.score11.text = ""
+        self.ids.score12.text = ""
+        p1s = [0]
+        p2s = [0]
+        p3s = [0]
+        p4s = [0]
+        p5s = [0]
+        p6s = [0]
+        p7s = [0]
+        p8s = [0]
+        p9s = [0]
+        p10s = [0]
+        p11s = [0]
+        p12s = [0]
+        round = 1
+        self.ids.round.text = "Round 1"
+        reset = 2
+        main.update_rpr()
+        self.ids.back.disabled = True
 
     def update_round(self, x):
         global round
@@ -2888,7 +3531,7 @@ class Game12PlayerWindow(Screen):
                 p10s[round - 1] = s[9]
                 p11s[round - 1] = s[10]
                 p12s[round - 1] = s[11]
-        if y == 2 and p1s[len(p1s) - 1] != "0":
+        if p1s[len(p1s) - 1] != "0":
             p1s.append("0")
             p2s.append("0")
             p3s.append("0")
@@ -2952,6 +3595,7 @@ class Game12PlayerWindow(Screen):
         self.ids.score10.text = str(score10)
         self.ids.score11.text = str(score11)
         self.ids.score12.text = str(score12)
+        main.update_scores(2)
 
     def check_next(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12):
         global round
@@ -2973,37 +3617,153 @@ class Game12PlayerWindow(Screen):
             else:
                 self.ids.back.disabled = False
 
+    def initialize(self):
+        global names
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global p6s
+        global p7s
+        global p8s
+        global p9s
+        global p10s
+        global p11s
+        global p12s
+        global round
+
+        score1 = 0
+        score2 = 0
+        score3 = 0
+        score4 = 0
+        score5 = 0
+        score6 = 0
+        score7 = 0
+        score8 = 0
+        score9 = 0
+        score10 = 0
+        score11 = 0
+        score12 = 0
+
+        self.ids.p1n.text = names[0]
+        self.ids.p2n.text = names[1]
+        self.ids.p3n.text = names[2]
+        self.ids.p4n.text = names[3]
+        self.ids.p5n.text = names[4]
+        self.ids.p6n.text = names[5]
+        self.ids.p7n.text = names[6]
+        self.ids.p8n.text = names[7]
+        self.ids.p9n.text = names[8]
+        self.ids.p10n.text = names[9]
+        self.ids.p11n.text = names[10]
+        self.ids.p12n.text = names[11]
+
+        round = len(p1s)
+        main.update_rpr()
+        self.ids.round.text = "Round " + str(round)
+        x = len(p1s)
+        for n in list(range(x)):
+            score1 += int(p1s[n])
+            score2 += int(p2s[n])
+            score3 += int(p3s[n])
+            score4 += int(p4s[n])
+            score5 += int(p5s[n])
+            score6 += int(p6s[n])
+            score7 += int(p7s[n])
+            score8 += int(p8s[n])
+            score9 += int(p9s[n])
+            score10 += int(p10s[n])
+            score11 += int(p11s[n])
+            score12 += int(p12s[n])
+        self.ids.p1.text = ""
+        self.ids.p2.text = ""
+        self.ids.p3.text = ""
+        self.ids.p4.text = ""
+        self.ids.p5.text = ""
+        self.ids.p6.text = ""
+        self.ids.p7.text = ""
+        self.ids.p8.text = ""
+        self.ids.p9.text = ""
+        self.ids.p10.text = ""
+        self.ids.p11.text = ""
+        self.ids.p12.text = ""
+        self.ids.score1.text = str(score1)
+        self.ids.score2.text = str(score2)
+        self.ids.score3.text = str(score3)
+        self.ids.score4.text = str(score4)
+        self.ids.score5.text = str(score5)
+        self.ids.score6.text = str(score6)
+        self.ids.score7.text = str(score7)
+        self.ids.score8.text = str(score8)
+        self.ids.score9.text = str(score9)
+        self.ids.score10.text = str(score10)
+        self.ids.score11.text = str(score11)
+        self.ids.score12.text = str(score12)
+
+        self.ids.next.disabled = True
+        if round != 1:
+            self.ids.back.disabled = False
+
 
 class AreYouSureWindow(Screen):
     def update_check(self, x):
         global check
-        global reset
+        global p1s
+        global p2s
+        global p3s
+        global p4s
+        global p5s
+        global p6s
+        global p7s
+        global p8s
+        global p9s
+        global p10s
+        global p11s
+        global p12s
+
         if x == 2:
+            p1s = [0]
+            p2s = [0]
+            p3s = [0]
+            p4s = [0]
+            p5s = [0]
+            p6s = [0]
+            p7s = [0]
+            p8s = [0]
+            p9s = [0]
+            p10s = [0]
+            p11s = [0]
+            p12s = [0]
+            sm.current = "main"
+            sm.transition.direction = "right"
             check = 1
-            reset = 1
-        else:
-            if check == 2:
-                self.ids.no.text = "No"
-            elif check == 3:
-                self.ids.no.text = " No "
-            elif check == 4:
-                self.ids.no.text = "  No  "
-            elif check == 5:
-                self.ids.no.text = "   No   "
-            elif check == 6:
-                self.ids.no.text = "    No    "
-            elif check == 7:
-                self.ids.no.text = "     No     "
-            elif check == 8:
-                self.ids.no.text = "      No      "
-            elif check == 9:
-                self.ids.no.text = "       No       "
-            elif check == 10:
-                self.ids.no.text = "        No        "
-            elif check == 11:
-                self.ids.no.text = "         No         "
-            elif check == 12:
-                self.ids.no.text = "          No          "
+            main.update_rpr()
+            main.update_scores(2)
+        if x == 1:
+            if players == 2:
+                sm.current = "game2"
+            if players == 3:
+                sm.current = "game3"
+            if players == 4:
+                sm.current = "game4"
+            if players == 5:
+                sm.current = "game5"
+            if players == 6:
+                sm.current = "game6"
+            if players == 7:
+                sm.current = "game7"
+            if players == 8:
+                sm.current = "game8"
+            if players == 9:
+                sm.current = "game9"
+            if players == 10:
+                sm.current = "game10"
+            if players == 11:
+                sm.current = "game11"
+            if players == 12:
+                sm.current = "game12"
+            sm.transition.direction = 'right'
 
 
 class WindowManager(ScreenManager):
@@ -3038,31 +3798,16 @@ Builder.load_string("""
             background_color: 1,1,1,0.5
             on_release:
                 root.check_check()
-                if self.text == "Resume Game": app.root.current = "game"
-                elif self.text == " Resume Game ": app.root.current = "game2"
-                elif self.text == "  Resume Game  ": app.root.current = "game3"
-                elif self.text == "   Resume Game   ": app.root.current = "game4"
-                elif self.text == "    Resume Game    ": app.root.current = "game5"
-                elif self.text == "     Resume Game     ": app.root.current = "game6"
-                elif self.text == "      Resume Game      ": app.root.current = "game7"
-                elif self.text == "       Resume Game       ": app.root.current = "game8"
-                elif self.text == "        Resume Game        ": app.root.current = "game9"
-                elif self.text == "         Resume Game         ": app.root.current = "game10"
-                elif self.text == "          Resume Game          ": app.root.current = "game11"
-                elif self.text == "           Resume Game           ": app.root.current = "game12"
-                root.manager.transition.direction = "left"
         Button:
             text: "Quick Score"
             background_color: 1,1,1,0.5
             on_release:
-                root.check_check()
                 app.root.current = "whichscore"
                 root.manager.transition.direction = "left"
         Button:
             text: "Rules"
             background_color: 1,1,1,0.5
             on_release:
-                root.check_check()
                 app.root.current = "whichversion"
                 root.manager.transition.direction = "left"
         Button:
@@ -3077,7 +3822,7 @@ Builder.load_string("""
     GridLayout:
         cols: 1
         Label: 
-            text: "Are you sure?\\nAll data will be erased."
+            text: "Are you sure?"
             halign: 'center'
         GridLayout:
             cols: 2
@@ -3358,19 +4103,7 @@ Builder.load_string("""
                 background_color: 1,0,0,1
                 on_release:
                     root.check_check()
-                    if self.text == "Game": app.root.current = "game"
-                    elif self.text == " Game ": app.root.current = "game2"
-                    elif self.text == "  Game  ": app.root.current = "game3"
-                    elif self.text == "   Game   ": app.root.current = "game4"
-                    elif self.text == "    Game    ": app.root.current = "game5"
-                    elif self.text == "     Game     ": app.root.current = "game6"
-                    elif self.text == "      Game      ": app.root.current = "game7"
-                    elif self.text == "       Game       ": app.root.current = "game8"
-                    elif self.text == "        Game        ": app.root.current = "game9"
-                    elif self.text == "         Game         ": app.root.current = "game10"
-                    elif self.text == "          Game          ": app.root.current = "game11"
-                    elif self.text == "           Game           ": app.root.current = "game12"
-                    root.manager.transition.direction = "down"
+                    
 <Score2Window>:
     name: "score2"
     GridLayout:
@@ -3572,19 +4305,6 @@ Builder.load_string("""
                 background_color: 1,0,0,1
                 on_release:
                     root.check_check()
-                    if self.text == "Game": app.root.current = "game"
-                    elif self.text == " Game ": app.root.current = "game2"
-                    elif self.text == "  Game  ": app.root.current = "game3"
-                    elif self.text == "   Game   ": app.root.current = "game4"
-                    elif self.text == "    Game    ": app.root.current = "game5"
-                    elif self.text == "     Game     ": app.root.current = "game6"
-                    elif self.text == "      Game      ": app.root.current = "game7"
-                    elif self.text == "       Game       ": app.root.current = "game8"
-                    elif self.text == "        Game        ": app.root.current = "game9"
-                    elif self.text == "         Game         ": app.root.current = "game10"
-                    elif self.text == "          Game          ": app.root.current = "game11"
-                    elif self.text == "           Game           ": app.root.current = "game12"
-                    root.manager.transition.direction = "down"
 
 <GameWindow>
     name: "game"
@@ -3625,19 +4345,7 @@ Builder.load_string("""
             text: 'Next'
             background_color: 1,0,0,1
             on_release: 
-                root.update_check()
-                if self.text == "Next": app.root.current = "name2"
-                elif self.text == " Next ": app.root.current = "name3"
-                elif self.text == "  Next  ": app.root.current = "name4"
-                elif self.text == "   Next   ": app.root.current = "name5"
-                elif self.text == "    Next    ": app.root.current = "name6"
-                elif self.text == "     Next     ": app.root.current = "name7"
-                elif self.text == "      Next      ": app.root.current = "name8"
-                elif self.text == "       Next       ": app.root.current = "name9"
-                elif self.text == "        Next        ": app.root.current = "name10"
-                elif self.text == "         Next         ": app.root.current = "name11"
-                elif self.text == "          Next          ": app.root.current = "name12"
-                root.manager.transition.direction = "left"
+                root.next()
         Label:
             text: ""
 
@@ -3727,6 +4435,7 @@ Builder.load_string("""
             TextInput:
                 text: ""
                 id: p1
+                input_type: 'number'
                 input_filter: 'int'
                 on_text: root.check_next(p1.text, p2.text)
             BackgroundLabel:
@@ -3742,6 +4451,7 @@ Builder.load_string("""
             TextInput:
                 text: ''
                 id: p2
+                input_type: 'number'
                 input_filter: 'int'
                 on_text: root.check_next(p1.text, p2.text)
             BackgroundLabel:
@@ -3858,6 +4568,7 @@ Builder.load_string("""
             TextInput:
                 text: ""
                 id: p1
+                input_type: 'number'
                 input_filter: 'int'
                 on_text: root.check_next(p1.text, p2.text, p3.text)
             BackgroundLabel:
@@ -3873,6 +4584,7 @@ Builder.load_string("""
             TextInput:
                 text: ''
                 id: p2
+                input_type: 'number'
                 input_filter: 'int'
                 on_text: root.check_next(p1.text, p2.text, p3.text)
             BackgroundLabel:
@@ -3888,6 +4600,7 @@ Builder.load_string("""
             TextInput:
                 text: ''
                 id: p3
+                input_type: 'number'
                 input_filter: 'int'
                 on_text: root.check_next(p1.text, p2.text, p3.text)
             BackgroundLabel:
@@ -4012,6 +4725,7 @@ Builder.load_string("""
                 text: ""
                 id: p1
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text)
             BackgroundLabel:
                 id: score1
@@ -4027,6 +4741,7 @@ Builder.load_string("""
                 text: ''
                 id: p2
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text)
             BackgroundLabel:
                 id: score2
@@ -4042,6 +4757,7 @@ Builder.load_string("""
                 text: ''
                 id: p3
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text)
             BackgroundLabel:
                 id: score3
@@ -4057,6 +4773,7 @@ Builder.load_string("""
                 text: ''
                 id: p4
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text)
             BackgroundLabel:
                 id: score4
@@ -4187,6 +4904,7 @@ Builder.load_string("""
                 text: ""
                 id: p1
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text)
             BackgroundLabel:
                 id: score1
@@ -4201,6 +4919,7 @@ Builder.load_string("""
             TextInput:
                 text: ''
                 id: p2
+                input_type: 'number'
                 input_filter: 'int'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text)
             BackgroundLabel:
@@ -4217,6 +4936,7 @@ Builder.load_string("""
                 text: ''
                 id: p3
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text)
             BackgroundLabel:
                 id: score3
@@ -4232,6 +4952,7 @@ Builder.load_string("""
                 text: ''
                 id: p4
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text)
             BackgroundLabel:
                 id: score4
@@ -4247,6 +4968,7 @@ Builder.load_string("""
                 text: ''
                 id: p5
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text)
             BackgroundLabel:
                 id: score5
@@ -4384,6 +5106,7 @@ Builder.load_string("""
                 text: ""
                 id: p1
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text)
             BackgroundLabel:
                 id: score1
@@ -4399,6 +5122,7 @@ Builder.load_string("""
                 text: ''
                 id: p2
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text)
             BackgroundLabel:
                 id: score2
@@ -4414,6 +5138,7 @@ Builder.load_string("""
                 text: ''
                 id: p3
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text)
             BackgroundLabel:
                 id: score3
@@ -4429,6 +5154,7 @@ Builder.load_string("""
                 text: ''
                 id: p4
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text)
             BackgroundLabel:
                 id: score4
@@ -4444,6 +5170,7 @@ Builder.load_string("""
                 text: ''
                 id: p5
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text)
             BackgroundLabel:
                 id: score5
@@ -4459,6 +5186,7 @@ Builder.load_string("""
                 text: ''
                 id: p6
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text)
             BackgroundLabel:
                 id: score6
@@ -4603,6 +5331,7 @@ Builder.load_string("""
                 text: ""
                 id: p1
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text)
             BackgroundLabel:
                 id: score1
@@ -4618,6 +5347,7 @@ Builder.load_string("""
                 text: ''
                 id: p2
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text)
             BackgroundLabel:
                 id: score2
@@ -4633,6 +5363,7 @@ Builder.load_string("""
                 text: ''
                 id: p3
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text)
             BackgroundLabel:
                 id: score3
@@ -4648,6 +5379,7 @@ Builder.load_string("""
                 text: ''
                 id: p4
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text)
             BackgroundLabel:
                 id: score4
@@ -4663,6 +5395,7 @@ Builder.load_string("""
                 text: ''
                 id: p5
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text)
             BackgroundLabel:
                 id: score5
@@ -4678,6 +5411,7 @@ Builder.load_string("""
                 text: ''
                 id: p6
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text)
             BackgroundLabel:
                 id: score6
@@ -4693,6 +5427,7 @@ Builder.load_string("""
                 text: ''
                 id: p7
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text)
             BackgroundLabel:
                 id: score7
@@ -4844,6 +5579,7 @@ Builder.load_string("""
                 text: ""
                 id: p1
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
             BackgroundLabel:
                 id: score1
@@ -4859,6 +5595,7 @@ Builder.load_string("""
                 text: ''
                 id: p2
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
             BackgroundLabel:
                 id: score2
@@ -4874,6 +5611,7 @@ Builder.load_string("""
                 text: ''
                 id: p3
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
             BackgroundLabel:
                 id: score3
@@ -4889,6 +5627,7 @@ Builder.load_string("""
                 text: ''
                 id: p4
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
             BackgroundLabel:
                 id: score4
@@ -4904,6 +5643,7 @@ Builder.load_string("""
                 text: ''
                 id: p5
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
             BackgroundLabel:
                 id: score5
@@ -4919,6 +5659,7 @@ Builder.load_string("""
                 text: ''
                 id: p6
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
             BackgroundLabel:
                 id: score6
@@ -4934,6 +5675,7 @@ Builder.load_string("""
                 text: ''
                 id: p7
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
             BackgroundLabel:
                 id: score7
@@ -4949,6 +5691,7 @@ Builder.load_string("""
                 text: ''
                 id: p8
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text)
             BackgroundLabel:
                 id: score8
@@ -5106,6 +5849,7 @@ Builder.load_string("""
             TextInput:
                 text: ""
                 id: p1
+                input_type: 'number'
                 input_filter: 'int'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
             BackgroundLabel:
@@ -5122,6 +5866,7 @@ Builder.load_string("""
                 text: ''
                 id: p2
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
             BackgroundLabel:
                 id: score2
@@ -5137,6 +5882,7 @@ Builder.load_string("""
                 text: ''
                 id: p3
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
             BackgroundLabel:
                 id: score3
@@ -5152,6 +5898,7 @@ Builder.load_string("""
                 text: ''
                 id: p4
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
             BackgroundLabel:
                 id: score4
@@ -5167,6 +5914,7 @@ Builder.load_string("""
                 text: ''
                 id: p5
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
             BackgroundLabel:
                 id: score5
@@ -5182,6 +5930,7 @@ Builder.load_string("""
                 text: ''
                 id: p6
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
             BackgroundLabel:
                 id: score6
@@ -5197,6 +5946,7 @@ Builder.load_string("""
                 text: ''
                 id: p7
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
             BackgroundLabel:
                 id: score7
@@ -5212,6 +5962,7 @@ Builder.load_string("""
                 text: ''
                 id: p8
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
             BackgroundLabel:
                 id: score8
@@ -5227,6 +5978,7 @@ Builder.load_string("""
                 text: ''
                 id: p9
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text)
             BackgroundLabel:
                 id: score9
@@ -5392,6 +6144,7 @@ Builder.load_string("""
                 text: ""
                 id: p1
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score1
@@ -5407,6 +6160,7 @@ Builder.load_string("""
                 text: ''
                 id: p2
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score2
@@ -5422,6 +6176,7 @@ Builder.load_string("""
                 text: ''
                 id: p3
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score3
@@ -5437,6 +6192,7 @@ Builder.load_string("""
                 text: ''
                 id: p4
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score4
@@ -5452,6 +6208,7 @@ Builder.load_string("""
                 text: ''
                 id: p5
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score5
@@ -5467,6 +6224,7 @@ Builder.load_string("""
                 text: ''
                 id: p6
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score6
@@ -5482,6 +6240,7 @@ Builder.load_string("""
                 text: ''
                 id: p7
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score7
@@ -5497,6 +6256,7 @@ Builder.load_string("""
                 text: ''
                 id: p8
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score8
@@ -5512,6 +6272,7 @@ Builder.load_string("""
                 text: ''
                 id: p9
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score9
@@ -5527,6 +6288,7 @@ Builder.load_string("""
                 text: ''
                 id: p10
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text)
             BackgroundLabel:
                 id: score10
@@ -5699,6 +6461,7 @@ Builder.load_string("""
                 text: ""
                 id: p1
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score1
@@ -5714,6 +6477,7 @@ Builder.load_string("""
                 text: ''
                 id: p2
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score2
@@ -5729,6 +6493,7 @@ Builder.load_string("""
                 text: ''
                 id: p3
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score3
@@ -5744,6 +6509,7 @@ Builder.load_string("""
                 text: ''
                 id: p4
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score4
@@ -5759,6 +6525,7 @@ Builder.load_string("""
                 text: ''
                 id: p5
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score5
@@ -5774,6 +6541,7 @@ Builder.load_string("""
                 text: ''
                 id: p6
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score6
@@ -5789,6 +6557,7 @@ Builder.load_string("""
                 text: ''
                 id: p7
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score7
@@ -5803,6 +6572,7 @@ Builder.load_string("""
             TextInput:
                 text: ''
                 id: p8
+                input_type: 'number'
                 input_filter: 'int'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
@@ -5819,6 +6589,7 @@ Builder.load_string("""
                 text: ''
                 id: p9
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score9
@@ -5834,6 +6605,7 @@ Builder.load_string("""
                 text: ''
                 id: p10
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score10
@@ -5849,6 +6621,7 @@ Builder.load_string("""
                 text: ''
                 id: p11
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text)
             BackgroundLabel:
                 id: score11
@@ -6028,6 +6801,7 @@ Builder.load_string("""
                 text: ""
                 id: p1
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score1
@@ -6043,6 +6817,7 @@ Builder.load_string("""
                 text: ''
                 id: p2
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score2
@@ -6058,6 +6833,7 @@ Builder.load_string("""
                 text: ''
                 id: p3
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score3
@@ -6073,6 +6849,7 @@ Builder.load_string("""
                 text: ''
                 id: p4
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score4
@@ -6088,6 +6865,7 @@ Builder.load_string("""
                 text: ''
                 id: p5
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score5
@@ -6103,6 +6881,7 @@ Builder.load_string("""
                 text: ''
                 id: p6
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score6
@@ -6118,6 +6897,7 @@ Builder.load_string("""
                 text: ''
                 id: p7
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score7
@@ -6133,6 +6913,7 @@ Builder.load_string("""
                 text: ''
                 id: p8
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score8
@@ -6148,6 +6929,7 @@ Builder.load_string("""
                 text: ''
                 id: p9
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score9
@@ -6163,6 +6945,7 @@ Builder.load_string("""
                 text: ''
                 id: p10
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score10
@@ -6178,6 +6961,7 @@ Builder.load_string("""
                 text: ''
                 id: p11
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score11
@@ -6193,6 +6977,7 @@ Builder.load_string("""
                 text: ''
                 id: p12
                 input_filter: 'int'
+                input_type: 'number'
                 on_text: root.check_next(p1.text, p2.text, p3.text, p4.text, p5.text, p6.text, p7.text, p8.text, p9.text, p10.text, p11.text, p12.text)
             BackgroundLabel:
                 id: score12
@@ -6227,8 +7012,6 @@ Builder.load_string("""
             Button:
                 text: "Yes"
                 on_release:
-                    app.root.current = "main"
-                    root.manager.transition.direction = "right"
                     root.update_check(2)
 
             Button:
@@ -6236,18 +7019,6 @@ Builder.load_string("""
                 text: "No"
                 on_release:
                     root.update_check(1)
-                    if self.text == "No": app.root.current = "game2"
-                    elif self.text == " No ": app.root.current = "game3"
-                    elif self.text == "  No  ": app.root.current = "game4"
-                    elif self.text == "   No   ": app.root.current = "game5"
-                    elif self.text == "    No    ": app.root.current = "game6"
-                    elif self.text == "     No     ": app.root.current = "game7"
-                    elif self.text == "      No      ": app.root.current = "game8"
-                    elif self.text == "       No       ": app.root.current = "game9"
-                    elif self.text == "        No        ": app.root.current = "game10"
-                    elif self.text == "         No         ": app.root.current = "game11"
-                    elif self.text == "          No          ": app.root.current = "game12"
-                    root.manager.transition.direction = "right"
 """)
 sm = ScreenManager()
 main = MainWindow(name = "main")
@@ -6319,6 +7090,11 @@ sm.add_widget(rusure)
 class MyMainApp(App):
     def build(self):
         return sm
+
+    def on_start(self, **kwargs):
+        main.update_names()
+        main.update_scores(1)
+        game.update_players(3)
 
 
 if __name__ == "__main__":
